@@ -1,0 +1,64 @@
+this command write in cmd
+
+py manage.py shell (press enter)
+
+>>> from coreyschafer.models import Post
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+<QuerySet [<User: corey>, <User: testuser>]>
+>>> User.objects.first()
+<User: corey>
+>>> User.objects.filter(username='Corey')
+<QuerySet []>
+>>>
+>>> User.objects.filter(username='corey')
+<QuerySet [<User: corey>]>
+>>> User.objects.filter(username='corey').first()
+<User: corey>
+>>> user = User.objects.filter(username='corey').first()
+>>> user
+<User: corey>
+>>> user.id
+1
+>>> user.username
+'corey'
+>>> user.pk
+1
+>>> user = User.objects.get(id=1)
+>>> user
+<User: corey>
+>>> Post.objects.all()
+<QuerySet []>
+>>> post_1 = Post(title='Blog 1', content='First Post Content!', author=user)
+>>> Post.objects.all()
+<QuerySet []>
+>>> post_1.save()
+>>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>]>
+>>>
+
+
+------------------------------------------ for Profile and Images related command--------------------------------------
+D:\PROJECTS1\coreyschafer_project>py manage.py shell
+Python 3.7.1 (v3.7.1:260ec2c36a, Oct 20 2018, 14:57:15) [MSC v.1915 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.all()
+>>> user
+<QuerySet [<User: corey>, <User: testuser>, <User: NewUser>, <User: Old>]>
+>>> user = User.objects.filter(username='NewUser')
+>>> user
+<QuerySet [<User: NewUser>]>
+>>> user = User.objects.filter(username='NewUser').first()
+>>> user
+<User: NewUser>
+>>> user.profile
+<Profile: NewUser Profile>
+>>> user.profile.image
+<ImageFieldFile: profile_pics/dp.jpg>
+>>> user.profile.image.width
+400
+>>>user.profile.image.url
+'profile_pics/dp.jpg'
+>>>
